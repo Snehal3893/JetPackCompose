@@ -1,9 +1,11 @@
 package com.example.composedemo.settings
 
 import android.content.Intent
+import android.content.res.Resources.Theme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,12 +21,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,12 +51,21 @@ import com.example.composedemo.R
 import com.example.composedemo.changepwd.ChangePassword
 import com.example.composedemo.dashboard.view.activity.AllDestinations
 import com.example.composedemo.dashboard.view.activity.AppNavigationActions
+import com.example.composedemo.login.LoginActivity
 
 import com.example.composedemo.mvvm.view.activity.CreditCardScreenAcivity
 
+
 @Composable
 fun SettingsScreen() {
+    var openDialog = remember {
+        mutableStateOf(false)
+    }
     var context= LocalContext.current
+    var isClickable = remember {
+        mutableStateOf(false)
+    }
+
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
@@ -120,9 +135,14 @@ fun SettingsScreen() {
             }
 
             Spacer(modifier = Modifier.height(15.dp))
-            Row() {
+            Row {
+
                 Text(
                     text = "Logout",
+                    Modifier.clickable {
+                                       isClickable.value=true
+                        openDialog.value=true
+                    },
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 18.sp
@@ -131,13 +151,53 @@ fun SettingsScreen() {
                 Icon(
                     imageVector = Icons.Default.ArrowForward, contentDescription = null
                 )
-
+                if (isClickable.value) {
+                    logoutDialogShow(openDialog)
+                }
             }
 
         }
     }
 
+
 }
+@Composable
+fun logoutDialogShow(openDialog : MutableState<Boolean>){
+    var context= LocalContext.current
+    MaterialTheme{
+        Column {
+            if (openDialog.value){
+                AlertDialog(onDismissRequest = {
+                   openDialog.value=false
+                },
+                    title = {
+                        Text(text = "Logout")
+                    },
+                    text = {Text(text = "Are you sure you want to logout?")},
+                    confirmButton = {
+                        Button(onClick = {
+                            openDialog.value=false
+                            context.startActivity(Intent(context,LoginActivity::class.java))
+
+                        }) {
+                            Text(text = "Yes")
+                        }
+                    },
+                    dismissButton = {
+                        Button(onClick =  {
+                            openDialog.value=false
+
+                        }){
+                            Text(text = "No")
+
+                        }
+                    }
+                )
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun SettingsScreenPreview() {

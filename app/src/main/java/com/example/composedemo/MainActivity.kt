@@ -76,9 +76,9 @@ class MainActivity : ComponentActivity() {
                 .padding(horizontal = 8.dp, vertical = 8.dp)
                 .fillMaxWidth()
                 .clickable(onClick = {
-                  //  startActivity(Intent(this@MainActivity, CreditCardScreenAcivity::class.java))
-                    val intent=Intent(this@MainActivity, NavigationDrawerActivity::class.java)
-                    intent.putExtra("name","Snehal")
+                    //  startActivity(Intent(this@MainActivity, CreditCardScreenAcivity::class.java))
+                    val intent = Intent(this@MainActivity, NavigationDrawerActivity::class.java)
+                    intent.putExtra("name", "Snehal")
                     startActivity(intent)
                 }),
             elevation = CardDefaults.cardElevation(2.dp),
@@ -115,20 +115,7 @@ class MainActivity : ComponentActivity() {
                         )
                     )
 
-                   /* Text(
-                        text = "Description :- " + emp.description,
-                        style = TextStyle(
-                            color = Color.Black,
-                            fontSize = 15.sp
-                        )
-                    )*/
                 }
-                /*Image(painter = painterResource(emp.ImageId), contentDescription = "Profile Image",
-                contentScale = ContentScale.FillHeight,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .size(110.dp)
-                    .clip((CircleShape)  ))*/
             }
         }
     }

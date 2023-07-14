@@ -55,6 +55,8 @@ import com.example.composedemo.dashboard.view.activity.NavigationDrawerActivity
 import com.example.composedemo.mvvm.view.activity.CreditCardScreenAcivity
 import com.example.composedemo.prefdatastore.UserStore
 import com.example.composedemo.registration.RegistrationScreen
+import com.example.composedemo.screensize.WindowSizeClass
+import com.example.composedemo.screensize.rememberWindowSizeClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -71,6 +73,18 @@ class LoginActivity : ComponentActivity() {
                 ) {
                     createUI()
                 }
+            val windowSize = rememberWindowSizeClass()
+            when (windowSize.widthWindowSizeClass) {
+                is WindowSizeClass.WindowType.COMPACT -> {
+                    //createUI()
+                }
+                is WindowSizeClass.WindowType.MEDIUM -> {
+                    createUI()
+                }
+                else -> {
+                    createUI()
+                }
+            }
             }
 
     }
