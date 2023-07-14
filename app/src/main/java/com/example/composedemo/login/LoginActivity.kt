@@ -117,7 +117,7 @@ class LoginActivity : ComponentActivity() {
                     valueName = newText
                 },
                 label = { Text(text = "User Name") },
-                placeholder = { Text(text = "Enter your name") }
+                placeholder = { Text(text = "Enter user name") }
               //  textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center)
             )
             Spacer(modifier = androidx.compose.ui.Modifier.height(16.dp))
