@@ -1,4 +1,4 @@
-package com.example.composedemo.dashboard.view.activity
+package com.example.composedemo.ui.dashboard.view.activity
 
 import android.content.Intent
 import android.os.Bundle

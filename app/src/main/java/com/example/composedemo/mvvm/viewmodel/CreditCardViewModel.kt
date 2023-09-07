@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.composedemo.mvvm.model.CreditCard
 import com.example.composedemo.mvvm.repository.CreditCardRepository
+import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CreditCardViewModel : ViewModel() {
-    private val repository = CreditCardRepository()
+@HiltAndroidApp
+class CreditCardViewModel @Inject constructor(val repository : CreditCardRepository) : ViewModel() {
+   // private val repository = CreditCardRepository()
 
      val _creditCards = MutableLiveData<List<CreditCard>>()
     val creditCards: LiveData<List<CreditCard>> = _creditCards

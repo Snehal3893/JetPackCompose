@@ -18,9 +18,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import com.example.composedemo.mvvm.viewmodel.CreditCardViewModel
+import javax.inject.Inject
 
-class CreditCardScreenAcivity : ComponentActivity() {
-    private val viewModel: CreditCardViewModel by viewModels()
+class CreditCardScreenAcivity @Inject constructor( private val viewModel: CreditCardViewModel) : ComponentActivity() {
+    //private val viewModell: CreditCardViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

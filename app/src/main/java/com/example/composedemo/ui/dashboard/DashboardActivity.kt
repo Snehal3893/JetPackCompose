@@ -1,4 +1,4 @@
-package com.example.composedemo.dashboard
+package com.example.composedemo.ui.dashboard
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

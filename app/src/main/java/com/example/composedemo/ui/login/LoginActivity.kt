@@ -1,4 +1,4 @@
-package com.example.composedemo.login
+package com.example.composedemo.ui.login
 
 import android.content.Context
 import android.content.Intent
@@ -51,16 +51,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composedemo.MainActivity
-import com.example.composedemo.dashboard.view.activity.NavigationDrawerActivity
+import com.example.composedemo.ui.dashboard.view.activity.NavigationDrawerActivity
 import com.example.composedemo.mvvm.view.activity.CreditCardScreenAcivity
-import com.example.composedemo.prefdatastore.UserStore
-import com.example.composedemo.registration.RegistrationScreen
-import com.example.composedemo.screensize.WindowSizeClass
-import com.example.composedemo.screensize.rememberWindowSizeClass
+import com.example.composedemo.data.prefdatastore.UserStore
+import com.example.composedemo.ui.registration.RegistrationScreen
+import com.example.composedemo.ui.screensize.WindowSizeClass
+import com.example.composedemo.ui.screensize.rememberWindowSizeClass
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class LoginActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -182,6 +184,6 @@ class LoginActivity : ComponentActivity() {
     }
 
     fun callNextActivity(){
-        startActivity(Intent(this@LoginActivity,RegistrationScreen::class.java))
+        startActivity(Intent(this@LoginActivity, RegistrationScreen::class.java))
     }
 }

@@ -1,4 +1,4 @@
-package com.example.composedemo.registration
+package com.example.composedemo.ui.registration
 
 import android.os.Bundle
 import android.widget.Toast
@@ -27,13 +27,16 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.example.composedemo.prefdatastore.UserStore
+import com.example.composedemo.data.prefdatastore.UserStore
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegistrationScreen : ComponentActivity() {
-
+@AndroidEntryPoint
+class RegistrationScreen  : ComponentActivity() {
+   @Inject var store:UserStore?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -54,8 +57,8 @@ class RegistrationScreen : ComponentActivity() {
     fun registration(){
         val context= LocalContext.current
         val keyboardController= LocalSoftwareKeyboardController.current
-        val store = UserStore(context)
-        val tokenText = store.getAccessToken.collectAsState(initial = "")
+       // val store = UserStore(context)
+        val tokenText = store?.getAccessToken?.collectAsState(initial = "")
 
         val tokenValue = remember {
             mutableStateOf(TextFieldValue())
@@ -73,7 +76,7 @@ class RegistrationScreen : ComponentActivity() {
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            Text(text = tokenText.value)
+            Text(text = tokenText?.value?:"")
 
             Spacer(modifier = Modifier.height(15.dp))
 
@@ -96,7 +99,7 @@ class RegistrationScreen : ComponentActivity() {
                     if (tokenValue.value.text.isNotEmpty() && pwdValue.value.text.isNotEmpty()) {
                         CoroutineScope(Dispatchers.IO).launch {
 
-                            store.saveToken(tokenValue.value.text, pwdValue.value.text)
+                            store?.saveToken(tokenValue.value.text, pwdValue.value.text)
                             finish()
 
                         }

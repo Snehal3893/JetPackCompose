@@ -1,4 +1,4 @@
-package com.example.composedemo.home
+package com.example.composedemo.ui.home
 
 import android.content.Intent
 import androidx.compose.foundation.Image
@@ -31,7 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.composedemo.dashboard.DashboardActivity
+import com.example.composedemo.ui.dashboard.DashboardActivity
 import com.example.composedemo.mvvm.model.Details
 import com.example.composedemo.mvvm.model.EmployDetails
 import com.example.composedemo.mvvm.view.activity.CreditCardScreenAcivity
@@ -69,7 +69,7 @@ fun EmployeeCard(emp: EmployDetails) {
             .padding(horizontal = 8.dp, vertical = 8.dp)
             .fillMaxWidth()
             .clickable(onClick = {
-                context.startActivity((Intent(context,DashboardActivity::class.java)))
+                context.startActivity((Intent(context, DashboardActivity::class.java)))
 
                 //  startActivity(Intent(this@MainActivity, CreditCardScreenAcivity::class.java))
                /* val intent= Intent(this, NavigationDrawerActivity::class.java)

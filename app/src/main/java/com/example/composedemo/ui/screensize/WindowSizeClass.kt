@@ -1,4 +1,4 @@
-package com.example.composedemo.screensize
+package com.example.composedemo.ui.screensize
 
 import android.app.Activity
 import androidx.compose.runtime.Composable

@@ -1,4 +1,4 @@
-package com.example.composedemo.prefdatastore
+package com.example.composedemo.data.prefdatastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -6,10 +6,17 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class UserStore(private val context: Context) {
+@Module
+@InstallIn(SingletonComponent::class)
+class UserStore(@ApplicationContext val context: Context) {
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("user_name")
         private val Context.dataStorePwd: DataStore<Preferences> by preferencesDataStore("user_pwd")
@@ -24,6 +31,7 @@ class UserStore(private val context: Context) {
         preferences[USER_PWD_KEY]?: ""
     }
 
+  @Provides
     suspend fun saveToken(name: String,pwd: String) {
         context.dataStore.edit { preferences ->
             preferences[USER_NAME_KEY] = name
