@@ -11,8 +11,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat.startActivity
 import com.example.composedemo.mvvm.view.activity.CreditCardScreenAcivity
 import com.example.composedemo.ui.theme.SampleDrawerTheme
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class NavigationDrawerActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterial3Api::class)

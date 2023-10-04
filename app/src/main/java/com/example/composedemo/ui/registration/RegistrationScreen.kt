@@ -1,3 +1,4 @@
+/*
 package com.example.composedemo.ui.registration
 
 import android.os.Bundle
@@ -113,4 +114,4 @@ class RegistrationScreen  : ComponentActivity() {
         }
     }
 
-}
+}*/

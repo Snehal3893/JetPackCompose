@@ -19,6 +19,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +35,15 @@ import androidx.compose.ui.unit.sp
 import com.example.composedemo.ui.dashboard.DashboardActivity
 import com.example.composedemo.mvvm.model.Details
 import com.example.composedemo.mvvm.model.EmployDetails
+
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.composedemo.mvvm.view.activity.CreditCardScreenAcivity
+import dagger.hilt.android.scopes.ViewScoped
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @Composable
 fun HomeScreen() {
@@ -48,7 +57,7 @@ fun HomeScreenPreview() {
 }
 
 @Composable
-fun DetailsContent() {
+fun DetailsContent(productViewModel: HomeViewModel = hiltViewModel()) {
 
     val employees = remember { Details.EmployDetailsList }
     LazyColumn(
@@ -58,6 +67,21 @@ fun DetailsContent() {
             employees
         ) {
             EmployeeCard(emp = it)
+           // insertData
+            //{
+            LaunchedEffect(Unit) {
+                productViewModel.viewModelScope.launch {
+                    productViewModel.insertData()
+                }
+            }
+
+                try {
+                //   productViewModel.insertData()
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            //}
+
         }
     }
 }
@@ -72,7 +96,7 @@ fun EmployeeCard(emp: EmployDetails) {
                 context.startActivity((Intent(context, DashboardActivity::class.java)))
 
                 //  startActivity(Intent(this@MainActivity, CreditCardScreenAcivity::class.java))
-               /* val intent= Intent(this, NavigationDrawerActivity::class.java)
+                /* val intent= Intent(this, NavigationDrawerActivity::class.java)
                 intent.putExtra("name","Snehal")
                 startActivity(intent)*/
             }),
@@ -117,7 +141,7 @@ fun EmployeeCard(emp: EmployDetails) {
             modifier = Modifier
                 .padding(8.dp)
                 .size(60.dp)
-                .clip((CircleShape)  ))
+                .clip((CircleShape)))
         }
     }
 }

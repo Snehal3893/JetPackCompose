@@ -1,3 +1,4 @@
+/*
 package com.example.composedemo.ui.login
 
 import android.content.Context
@@ -54,7 +55,7 @@ import com.example.composedemo.MainActivity
 import com.example.composedemo.ui.dashboard.view.activity.NavigationDrawerActivity
 import com.example.composedemo.mvvm.view.activity.CreditCardScreenAcivity
 import com.example.composedemo.data.prefdatastore.UserStore
-import com.example.composedemo.ui.registration.RegistrationScreen
+//import com.example.composedemo.ui.registration.RegistrationScreen
 import com.example.composedemo.ui.screensize.WindowSizeClass
 import com.example.composedemo.ui.screensize.rememberWindowSizeClass
 import dagger.hilt.android.AndroidEntryPoint
@@ -184,6 +185,7 @@ class LoginActivity : ComponentActivity() {
     }
 
     fun callNextActivity(){
-        startActivity(Intent(this@LoginActivity, RegistrationScreen::class.java))
+      //  startActivity(Intent(this@LoginActivity, RegistrationScreen::class.java))
     }
 }
+*/

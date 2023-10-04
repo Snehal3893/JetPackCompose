@@ -1,6 +1,6 @@
 package com.example.composedemo.di
 
-import com.example.composedemo.mvvm.view.`interface`.CreditCardService
+import com.example.composedemo.mvvm.view.interface_.CreditCardService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -8,8 +8,9 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-@Module
+
 @InstallIn(SingletonComponent::class)
+@Module
 object RetrofitInstance {
     private const val BASE_URL = "https://random-data-api.com/api/v2/"
 
@@ -21,9 +22,9 @@ object RetrofitInstance {
     }
 
    // @Provides
-   /* val creditCardService: CreditCardService by lazy {
+    /*val creditCardService: CreditCardService by lazy {
         retrofit.create(CreditCardService::class.java)
     }*/
     @Provides
-    fun creditCardService(retrofit: Retrofit):CreditCardService = retrofit.create(CreditCardService::class.java)
+    fun creditCardService():CreditCardService = retrofit.create(CreditCardService::class.java)
 }

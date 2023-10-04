@@ -51,7 +51,7 @@ import com.example.composedemo.R
 import com.example.composedemo.ui.changepwd.ChangePassword
 import com.example.composedemo.ui.dashboard.view.activity.AllDestinations
 import com.example.composedemo.ui.dashboard.view.activity.AppNavigationActions
-import com.example.composedemo.ui.login.LoginActivity
+//import com.example.composedemo.ui.login.LoginActivity
 
 import com.example.composedemo.mvvm.view.activity.CreditCardScreenAcivity
 
@@ -177,7 +177,7 @@ fun logoutDialogShow(openDialog : MutableState<Boolean>){
                     confirmButton = {
                         Button(onClick = {
                             openDialog.value=false
-                            context.startActivity(Intent(context, LoginActivity::class.java))
+                          ///  context.startActivity(Intent(context, LoginActivity::class.java))
 
                         }) {
                             Text(text = "Yes")

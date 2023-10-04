@@ -7,10 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.composedemo.mvvm.model.CreditCard
 import com.example.composedemo.mvvm.repository.CreditCardRepository
 import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltAndroidApp
+@HiltViewModel
 class CreditCardViewModel @Inject constructor(val repository : CreditCardRepository) : ViewModel() {
    // private val repository = CreditCardRepository()
 
@@ -22,6 +23,7 @@ class CreditCardViewModel @Inject constructor(val repository : CreditCardReposit
             try {
                 val cards = repository.getCreditCards()
                 _creditCards.value = cards
+                //repository.insertData(cards)
             } catch (e: Exception) {
                 // Handle error
                 e.printStackTrace()

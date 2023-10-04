@@ -14,9 +14,9 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-@Module
-@InstallIn(SingletonComponent::class)
-class UserStore(@ApplicationContext val context: Context) {
+//@Module
+//@InstallIn(SingletonComponent::class)
+ class UserStore( val context: Context) {
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("user_name")
         private val Context.dataStorePwd: DataStore<Preferences> by preferencesDataStore("user_pwd")
@@ -31,7 +31,7 @@ class UserStore(@ApplicationContext val context: Context) {
         preferences[USER_PWD_KEY]?: ""
     }
 
-  @Provides
+  //@Provides
     suspend fun saveToken(name: String,pwd: String) {
         context.dataStore.edit { preferences ->
             preferences[USER_NAME_KEY] = name

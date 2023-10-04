@@ -10,6 +10,7 @@ object AllDestinations {
     const val LOGIN = "Login"
     const val HOME = "Home"
     const val SETTINGS = "Settings"
+    const val REGISTRATION = "registration"
 }
 
 class AppNavigationActions(private val navController: NavHostController) {

@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.composedemo.ui.common.LoginScreen
+import com.example.composedemo.ui.common.RegistrationScreen
 import com.example.composedemo.ui.home.HomeScreen
 import com.example.composedemo.ui.settings.SettingsScreen
 import kotlinx.coroutines.CoroutineScope
@@ -50,7 +51,9 @@ fun SampleAppNavGraph(
     }, drawerState = drawerState) {
         Scaffold(
             topBar = {
-                TopAppBar(title = { Text(text = if (currentRoute.equals("Login",true)) "" else currentRoute) },
+               var currentRoot= currentRoute.filter { currentRoute != AllDestinations.LOGIN && currentRoute != AllDestinations.REGISTRATION  }
+              if (currentRoute == currentRoot){
+                TopAppBar(title = { Text(text = currentRoute.filter { currentRoute != AllDestinations.LOGIN && currentRoute != AllDestinations.REGISTRATION  }) },
                     modifier = Modifier.fillMaxWidth(),
                     navigationIcon = { IconButton(onClick = {
                         coroutineScope.launch { drawerState.open() }
@@ -62,7 +65,7 @@ fun SampleAppNavGraph(
                     })
                 }, colors =
                     if (currentRoute.equals("Login",true)) TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.Transparent) else
-                    TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer))
+                    TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer))}
             }, modifier = Modifier
         ) {
             NavHost(
@@ -75,6 +78,10 @@ fun SampleAppNavGraph(
                    topBarState.value=false
                    LoginScreen(navController)
                }
+
+              composable(AllDestinations.REGISTRATION){
+                  RegistrationScreen(navController)
+              }
                 composable(AllDestinations.HOME) {
                     topBarState.value=true
                     HomeScreen()
