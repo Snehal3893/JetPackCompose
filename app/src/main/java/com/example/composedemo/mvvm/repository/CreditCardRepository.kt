@@ -15,4 +15,8 @@ class CreditCardRepository @Inject constructor(var creditCardService : CreditCar
     }
 
      suspend fun insertData(creditCard: List<EmployDetails>) = creditCardDAO.inserData(creditCard)
+
+    suspend fun fetchEmpData():List<EmployDetails>{
+        return creditCardDAO.fetchEmpDetails()
+    }
 }

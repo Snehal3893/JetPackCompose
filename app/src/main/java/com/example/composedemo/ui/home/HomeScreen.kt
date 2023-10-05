@@ -58,8 +58,12 @@ fun HomeScreenPreview() {
 
 @Composable
 fun DetailsContent(productViewModel: HomeViewModel = hiltViewModel()) {
-
-    val employees = remember { Details.EmployDetailsList }
+     productViewModel.fetchEmpDetails()
+    val employees = remember {
+        productViewModel._empDetails
+    }
+        //productViewModel._empDetails
+        //remember { Details.EmployDetailsList }
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
     ) {
@@ -86,7 +90,7 @@ fun DetailsContent(productViewModel: HomeViewModel = hiltViewModel()) {
     }
 }
 @Composable
-fun EmployeeCard(emp: EmployDetails) {
+fun EmployeeCard(emp: List<EmployDetails>) {
     var context= LocalContext.current
     Card(
         modifier = Modifier
@@ -105,43 +109,48 @@ fun EmployeeCard(emp: EmployDetails) {
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
 
     ) {
-
+        for (i in emp.indices) {
         Row(modifier = Modifier.padding(20.dp)) {
+
             Column(
                 modifier = Modifier.weight(1f),
                 Arrangement.Center
             ) {
-                Text(
-                    text = emp.title,
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold,
+
+                    Text(
+                        text = emp.get(i).title,
+                        style = TextStyle(
+                            color = Color.Black,
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold,
+                        )
                     )
-                )
-                Text(
-                    text = "Age :- " + emp.age.toString(),
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontSize = 15.sp
+                    Text(
+                        text = "Age :- " + emp.get(i).age.toString(),
+                        style = TextStyle(
+                            color = Color.Black,
+                            fontSize = 15.sp
+                        )
                     )
-                )
-                Text(
-                    text = "Sex :- " + emp.sex,
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontSize = 15.sp
+                    Text(
+                        text = "Sex :- " + emp.get(i).sex,
+                        style = TextStyle(
+                            color = Color.Black,
+                            fontSize = 15.sp
+                        )
                     )
-                )
 
 
+                }
+                Image(
+                    painter = painterResource(emp.get(i).ImageId), contentDescription = "Profile Image",
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .size(60.dp)
+                        .clip((CircleShape))
+                )
             }
-            Image(painter = painterResource(emp.ImageId), contentDescription = "Profile Image",
-            contentScale = ContentScale.FillHeight,
-            modifier = Modifier
-                .padding(8.dp)
-                .size(60.dp)
-                .clip((CircleShape)))
         }
     }
 }
